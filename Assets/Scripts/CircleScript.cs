@@ -19,6 +19,17 @@ public class CircleScript : MonoBehaviour
         {
             body.AddForce(Vector2.up * 250);
         }
-
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            body.AddForce(Vector2.left * 250);
+        }
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            body.AddForce(Vector2.right * 250);
+        }
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            body.AddForce(Vector2.right * 250);
+        }
     }
 }
