@@ -279,7 +279,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
   m_Color: {r: 0.86666673, g: 0.2392157, b: 0.18039216, a: 1}
   m_FlipX: 0
@@ -455,7 +455,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
   m_Color: {r: 0.8679245, g: 0.23768166, b: 0.1760413, a: 1}
   m_FlipX: 0
@@ -496,7 +496,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b81444ef5de7384e83e21a20163ac50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pipePrefab: {fileID: 7269539552789488664, guid: 3b9b6cc0780125148849b955eb3989bc, type: 3}
+  pipePrefabs:
+  - {fileID: 7269539552789488664, guid: 3b9b6cc0780125148849b955eb3989bc, type: 3}
+  - {fileID: 3267787664115772359, guid: 8788d6990d36a6546846add176a44471, type: 3}
 --- !u!4 &377517544
 Transform:
   m_ObjectHideFlags: 0
