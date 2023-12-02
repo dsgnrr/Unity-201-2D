@@ -10,7 +10,7 @@ public class DisplayScript : MonoBehaviour
 
     [SerializeField]                            // Два різні способи одержати
     private TMPro.TextMeshProUGUI pipesPassedTmp;  // доступ до елементів сцени
-                                                // (у т.ч. UI) - через link
+                                                   // (у т.ч. UI) - через link
     private TMPro.TextMeshProUGUI clock;        // або через пошук
     private float gameTime;
     void Start()
@@ -20,7 +20,7 @@ public class DisplayScript : MonoBehaviour
         clock = GameObject.Find("ClockTMP").GetComponent<TMPro.TextMeshProUGUI>();
 
         vitalityIndicator.fillAmount = 1f; // повне життя на початку гри
-        
+
         gameTime = 0;
     }
 
@@ -31,7 +31,7 @@ public class DisplayScript : MonoBehaviour
 
     private void LateUpdate()
     {
-        int time=(int)gameTime;
+        int time = (int)gameTime;
         int hour = time / 3600;
         int minute = (time % 3600) / 60;
         int second = time % 60;
@@ -39,6 +39,15 @@ public class DisplayScript : MonoBehaviour
         clock.text = $"{hour:00}:{minute:00}:{second:00}.{decisecond:0}";
 
         pipesPassedTmp.text = GameState.pipesPassed.ToString();
+
+        if ((vitalityIndicator.fillAmount - 0.0002f) != 0)
+        {
+            vitalityIndicator.fillAmount -= 0.0002f;
+        }
+        if(vitalityIndicator.fillAmount==0f)
+        {
+            Debug.Log($"Vitality: {vitalityIndicator.fillAmount}");
+        }
+
     }
-    
 }
