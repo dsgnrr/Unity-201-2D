@@ -22,11 +22,11 @@ public class BirdScript : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space)) // "імпульс" - лише на натиснення
         {
-            body.AddForce(Vector2.up * discreteForceFactor);
+            body.AddForce(discreteForceFactor * Time.timeScale * Vector2.up);
         }
-        if (Input.GetKey(KeyCode.W)) // "непереривний" - з кожним Update
+        if (GameState.isWkeyEnabled && Input.GetKey(KeyCode.W)) // "непереривний" - з кожним Update
         {
-            body.AddForce(Vector2.up * continualForceFactor * Time.deltaTime);
+            body.AddForce(continualForceFactor * Time.deltaTime * Vector2.up);
         }
     }
 
@@ -35,9 +35,22 @@ public class BirdScript : MonoBehaviour
         //Debug.Log("Collision detected " + collision.gameObject.name);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        //Debug.Log("Trigger detected " + collision.gameObject.name);
+        Transform parent =other.gameObject.transform.parent;
+        if (parent != null&&parent.gameObject.CompareTag("Pipe"))
+        {
+            // TODO: Втрата спроби
+        }
+        else
+        {
+            if (other.gameObject.CompareTag("Food"))
+            {
+                GameState.vitality = 1f;
+                GameObject.Destroy(other.gameObject);
+            }
+           
+        }
     }
     private void OnTriggerExit2D(Collider2D other)
     {

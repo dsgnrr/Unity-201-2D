@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Pipe
   - HardPipe
+  - Food
   layers:
   - Default
   - TransparentFX

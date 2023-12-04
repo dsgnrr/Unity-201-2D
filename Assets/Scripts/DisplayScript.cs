@@ -40,13 +40,9 @@ public class DisplayScript : MonoBehaviour
 
         pipesPassedTmp.text = GameState.pipesPassed.ToString();
 
-        if ((vitalityIndicator.fillAmount - 0.0002f) != 0)
+        if ((vitalityIndicator.fillAmount - Time.deltaTime/16) != 0)
         {
-            vitalityIndicator.fillAmount -= 0.0002f;
-        }
-        if(vitalityIndicator.fillAmount==0f)
-        {
-            Debug.Log($"Vitality: {vitalityIndicator.fillAmount}");
+            vitalityIndicator.fillAmount -= Time.deltaTime/16;
         }
 
     }
