@@ -8,6 +8,7 @@ public class GameState : MonoBehaviour
     public static bool isWkeyEnabled { get; set; }
     public static float pipePeriod{ get; set; }
     public static float vitality{ get; set; }
+    public static float vitalitySpeed { get; set; }
 }
 /* Об'єкт-стан -- доступний для усіх скриптів "центр"
  * збереження загальної інформації щодо стану гри

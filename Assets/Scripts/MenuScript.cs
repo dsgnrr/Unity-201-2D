@@ -22,13 +22,14 @@ public class MenuScript : MonoBehaviour
         ToggleMenu(isShown);
         GameState.isWkeyEnabled = controlWToggle.isOn;
         SetPipePeriod(pipePeriodSlider.value);
+        SetVitalitySpeed(vitalitySlider.value);
     }
     
     void Update()
     {
         if (Input.GetKeyUp(KeyCode.Escape))
         {
-            ToggleMenu(!isShown);
+            ToggleMenu(!isShown); 
         }
     }
 
@@ -64,7 +65,14 @@ public class MenuScript : MonoBehaviour
     {
         SetPipePeriod(value);
     }
-
+    public void VitalitySpeedSliderChanged(Single value)
+    {
+        SetVitalitySpeed(value);
+    }
+    private void SetVitalitySpeed(Single sliderValue)
+    {
+        GameState.vitalitySpeed = sliderValue;
+    }
     private void SetPipePeriod(Single sliderValue)
     {
         // масштабуємо sliderValue(0..1) до потрібного діапазону (2..6)

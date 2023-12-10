@@ -20,7 +20,6 @@ public class DisplayScript : MonoBehaviour
         clock = GameObject.Find("ClockTMP").GetComponent<TMPro.TextMeshProUGUI>();
 
         vitalityIndicator.fillAmount = 1f; // повне життя на початку гри
-
         gameTime = 0;
     }
 
@@ -40,9 +39,9 @@ public class DisplayScript : MonoBehaviour
 
         pipesPassedTmp.text = GameState.pipesPassed.ToString();
 
-        if ((vitalityIndicator.fillAmount - Time.deltaTime/16) != 0)
+        if ((vitalityIndicator.fillAmount - Time.deltaTime/GameState.vitalitySpeed) >= 0)
         {
-            vitalityIndicator.fillAmount -= Time.deltaTime/16;
+            GameState.vitality = vitalityIndicator.fillAmount -= Time.deltaTime/ GameState.vitalitySpeed;
         }
 
     }

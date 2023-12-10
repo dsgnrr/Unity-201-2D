@@ -17,7 +17,6 @@ public class SpawnPointScript : MonoBehaviour
     {
         pipeCountdown = GameState.pipePeriod;
         foodCountdown = pipeCountdown / 2f;
-        SpawnPipe();
     }
 
     void Update()
