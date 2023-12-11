@@ -14,15 +14,27 @@ public class MenuScript : MonoBehaviour
     private Slider pipePeriodSlider;
     [SerializeField]
     private Slider vitalitySlider;
+
     private bool isShown;
+    private const String configFilename = "Assets/Files/config.json";
 
     void Start()
     {
         isShown = content.activeInHierarchy;
         ToggleMenu(isShown);
-        GameState.isWkeyEnabled = controlWToggle.isOn;
-        SetPipePeriod(pipePeriodSlider.value);
-        SetVitalitySpeed(vitalitySlider.value);
+        if (LoadSettings())// пріорітет файлу -- меню змінюємо під нього
+        {
+            controlWToggle.isOn = GameState.isWkeyEnabled;
+            pipePeriodSlider.value = (6f - GameState.pipePeriod) / (6f - 2f);
+            vitalitySlider.value = GameState.vitalitySpeed;
+        }
+        else // пріорітет меню -- GameState визначаємо з нього
+        {
+            GameState.isWkeyEnabled = controlWToggle.isOn;
+            SetPipePeriod(pipePeriodSlider.value);
+            SetVitalitySpeed(vitalitySlider.value);
+        }
+       
     }
     
     void Update()
@@ -32,7 +44,6 @@ public class MenuScript : MonoBehaviour
             ToggleMenu(!isShown); 
         }
     }
-
     private void ToggleMenu(bool isDisplay)
     {
         if (isDisplay)
@@ -50,17 +61,31 @@ public class MenuScript : MonoBehaviour
        
     }
 
+    public void SaveSettings()
+    {
+        System.IO.File.WriteAllText(configFilename, GameState.toJson());
+    }
+    public bool LoadSettings()
+    {
+        if (System.IO.File.Exists(configFilename))
+        {
+            GameState.FromJson(
+                System.IO.File.ReadAllText(configFilename));
+            return true;
+        }
+        return false;
+    }
+
     // event handlers
     public void ClosedButtonClick()
     {
         ToggleMenu(false);
     }
-
     public void ControlWKeyToggleChanged(Boolean value)
     {
         GameState.isWkeyEnabled = value;
+        SaveSettings();
     }
-    
     public void PipePeriodSliderChanged(Single value)
     {
         SetPipePeriod(value);
@@ -77,5 +102,6 @@ public class MenuScript : MonoBehaviour
     {
         // масштабуємо sliderValue(0..1) до потрібного діапазону (2..6)
         GameState.pipePeriod = 6f - (6f - 2f) * sliderValue;
+        SaveSettings();
     }
 }
